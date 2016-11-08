@@ -13,5 +13,6 @@ int main()
   add_navigation_tools_to_ship(p_ship);
   my_putstr(p_ship->nav_tools->system_state);
   my_putstr("\n");
+  add_container_to_ship(p_ship);
   return(0);
 }
