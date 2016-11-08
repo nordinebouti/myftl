@@ -15,6 +15,7 @@ t_ship	                 *create_ship()
   addr_ship->weapons = NULL;
   addr_ship->ftl_drive = NULL;
   addr_ship->nav_tools = NULL;
+  addr_ship->cont = NULL;
   my_putstr("amelioration du vaisseau termine!\n");
   return (addr_ship);
 }
