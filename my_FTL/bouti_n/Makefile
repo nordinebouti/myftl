@@ -11,7 +11,8 @@ RM		=		rm -f
 
 OBJ		=		$(SRC:%.c=%.o)
 
-CFLAGS	=		-W -Wall -Werror -ansi -pedantic
+CFLAGS	=		-W -Wall -Werror -ansi -pedantic -g3
+
 
 all		:		$(OBJ)
 				$(CC) $(CFLAGS) $(OBJ) -o $(NAME)

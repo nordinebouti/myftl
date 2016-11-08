@@ -4,6 +4,22 @@
 
 #include	<stdlib.h>
 
+typedef struct 				s_freight t_freight;	
+
+struct 				s_freight
+{
+	char					*item;
+	t_freight				*prev;
+	t_freight				*next;
+};
+
+typedef	struct 				s_container
+{
+	t_freight				*first;
+	t_freight				*last;
+	int						nb_elem;
+}							t_container;
+
 typedef struct 				s_navigation_tools
 {
 	char					*system_state;
@@ -29,17 +45,18 @@ typedef	struct				s_ship
   	t_weapon				*weapons;
   	t_ftl_drive				*ftl_drive;
   	t_navigation_tools		*nav_tools;
-}				t_ship;
+  	t_container				*cont;
+}							t_ship;
 
-char			*readline(void);
-void			my_putchar(const char c);
-int				my_strlen(const char *str);
-void			my_putstr(const char *str);
-int				my_strcmp(const char *s1, const char *s2);
-char			*my_strdup(const char *str);
-void			my_putstr_color(const char *color, const char *str);
-t_ship			*create_ship();
-int             add_weapon_to_ship(t_ship *addr_ship);
-int             add_ftl_drive_to_ship(t_ship *addr_ship);
-
+char						*readline(void);
+void						my_putchar(const char c);
+int							my_strlen(const char *str);
+void						my_putstr(const char *str);
+int							my_strcmp(const char *s1, const char *s2);
+char						*my_strdup(const char *str);
+void						my_putstr_color(const char *color, const char *str);
+t_ship						*create_ship();
+int             			add_weapon_to_ship(t_ship *addr_ship);
+int             			add_ftl_drive_to_ship(t_ship *addr_ship);
+int                        	add_navigation_tools_to_ship(t_ship *addr_ship);
 #endif
