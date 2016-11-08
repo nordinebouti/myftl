@@ -4,23 +4,31 @@
 
 #include	<stdlib.h>
 
-typedef struct 	s_weapon
+typedef struct 				s_navigation_tools
 {
-	char		*system_state;
-	int			damage;		
-}				t_weapon;
+	char					*system_state;
+	int						sector;
+	int						evade;		
+}							t_navigation_tools;
 
-typedef struct  s_ftl_drive
+typedef struct 				s_weapon
 {
-	int			energy;
-	char		*system_state;
-}				t_ftl_drive;
+	char					*system_state;
+	int						damage;		
+}							t_weapon;
 
-typedef	struct	s_ship
+typedef struct  			s_ftl_drive
 {
-  	int			hull;
-  	t_weapon	*weapons;
-  	t_ftl_drive	*ftl_drive;
+	int						energy;
+	char					*system_state;
+}							t_ftl_drive;
+
+typedef	struct				s_ship
+{
+  	int						hull;
+  	t_weapon				*weapons;
+  	t_ftl_drive				*ftl_drive;
+  	t_navigation_tools		*nav_tools;
 }				t_ship;
 
 char			*readline(void);
