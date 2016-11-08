@@ -10,10 +10,17 @@ typedef struct 	s_weapon
 	int			damage;		
 }				t_weapon;
 
+typedef struct  s_ftl_drive
+{
+	int			energy;
+	char		*system_state;
+}				t_ftl_drive;
+
 typedef	struct	s_ship
 {
   	int			hull;
   	t_weapon	*weapons;
+  	t_ftl_drive	*ftl_drive;
 }				t_ship;
 
 char			*readline(void);
@@ -25,4 +32,6 @@ char			*my_strdup(const char *str);
 void			my_putstr_color(const char *color, const char *str);
 t_ship			*create_ship();
 int             add_weapon_to_ship(t_ship *addr_ship);
+int             add_ftl_drive_to_ship(t_ship *addr_ship);
+
 #endif
