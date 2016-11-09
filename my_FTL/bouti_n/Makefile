@@ -6,7 +6,8 @@ SRC		=		air_shed.c\
 				my_string.c\
 				readline.c\
 				main.c\
-				container.c
+				container.c\
+				system_control.c
 
 RM		=		rm -f
 

@@ -34,6 +34,7 @@ int main()
   my_putnbr(p_ship->weapons->damage);
   my_putnbr(p_ship->nav_tools->evade);
   my_putnbr(p_ship->ftl_drive->energy);
+  system_control(p_ship);
   free(p_fr1);
   free(p_fr2);
   free(p_ship);
