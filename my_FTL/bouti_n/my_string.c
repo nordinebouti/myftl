@@ -117,3 +117,33 @@ void			my_putstr_color(const char *color, const char *str)
   my_putstr(str);
   my_putstr(reset_color);
 }
+
+int    my_putnbr(int nb)
+{
+  int    div;
+  int    neg;
+
+  div = 1;
+  neg = 0;
+  if (nb == -2147483648)
+    {
+      my_putstr("-2147483648");
+      neg = 1;
+    }
+  if (neg != 1)
+  {  
+    if (nb < 0)
+      {
+        my_putchar('-');
+        nb = nb * -1;
+      }
+    while ((nb / div) >= 10)
+        div = div * 10;
+    while (div > 0)
+      {
+        my_putchar((nb / div) % 10 + 48);
+        div = div / 10;
+      }
+  }
+  return (nb);
+}

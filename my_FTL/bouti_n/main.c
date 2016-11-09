@@ -17,13 +17,12 @@ int main()
   add_ftl_drive_to_ship(p_ship);
   add_navigation_tools_to_ship(p_ship);
   add_container_to_ship(p_ship);
-  p_fr1->item = "p_fr1";
-  p_fr2->item = "p_fr2";
-  p_fr3->item = "p_fr3";
+  p_fr1->item = "attackbonus";
+  p_fr2->item = "evadebonus";
+  p_fr3->item = "energy";
   add_freight_to_container(p_ship, p_fr1);
   add_freight_to_container(p_ship, p_fr2);
   add_freight_to_container(p_ship, p_fr3);
-  del_from_to_container(p_ship, p_fr3);
   test = p_ship->cont->last;
   while (test != NULL)
   {
@@ -31,7 +30,10 @@ int main()
   	my_putstr("\n");
   	test = test->prev;
   }
-  
+  get_bonus(p_ship);
+  my_putnbr(p_ship->weapons->damage);
+  my_putnbr(p_ship->nav_tools->evade);
+  my_putnbr(p_ship->ftl_drive->energy);
   free(p_fr1);
   free(p_fr2);
   free(p_ship);
