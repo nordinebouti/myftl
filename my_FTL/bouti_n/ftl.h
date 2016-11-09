@@ -60,4 +60,5 @@ int             			add_weapon_to_ship(t_ship *addr_ship);
 int             			add_ftl_drive_to_ship(t_ship *addr_ship);
 int                        	add_navigation_tools_to_ship(t_ship *addr_ship);
 int							add_container_to_ship(t_ship *addr_ship);
+void						add_freight_to_container(t_ship *addr_ship, t_freight *freight);
 #endif
