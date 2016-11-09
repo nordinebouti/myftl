@@ -32,7 +32,6 @@ int                       add_weapon_to_ship(t_ship *addr_ship)
     return (0);
   }
   addr_ship->weapons->damage = 10;
-  my_putstr("error");
   addr_ship->weapons->system_state = my_strdup("online");
   my_putstr("les armes ont ete ajoutees avec succes\n");
   return (1);

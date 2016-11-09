@@ -2,17 +2,35 @@
 
 int main()
 {
-  t_ship *p_ship;
+  t_ship 		*p_ship;
+  t_freight		*p_fr1;
+  t_freight		*p_fr2;
+  t_freight		*p_fr3;
+  t_freight 	*test;
+
+	p_fr1 = malloc(sizeof(t_freight));
+	p_fr2 = malloc(sizeof(t_freight));  
+	p_fr3 = malloc(sizeof(t_freight));
   p_ship = create_ship();
   add_weapon_to_ship(p_ship);
-  my_putstr(p_ship->weapons->system_state);
-  my_putstr("\n");
   add_ftl_drive_to_ship(p_ship);
-  my_putstr(p_ship->ftl_drive->system_state);
-  my_putstr("\n");
   add_navigation_tools_to_ship(p_ship);
-  my_putstr(p_ship->nav_tools->system_state);
-  my_putstr("\n");
   add_container_to_ship(p_ship);
+  p_fr1->item = "p_fr1";
+  p_fr2->item = "p_fr2";
+  p_fr3->item = "p_fr3";
+  add_freight_to_container(p_ship, p_fr1);
+  add_freight_to_container(p_ship, p_fr2);
+  add_freight_to_container(p_ship, p_fr3);
+  test = p_ship->cont->first;
+  while (test != NULL)
+  {
+  	my_putstr(test->item);
+  	my_putstr("\n");
+  	test = test->next;
+  }
+  free(p_fr1);
+  free(p_fr2);
+  free(p_fr3);
   return(0);
 }
