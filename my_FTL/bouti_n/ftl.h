@@ -4,6 +4,12 @@
 
 #include	<stdlib.h>
 
+typedef struct    			s_repair_command
+{
+	char					*name;
+	int						(*func)(t_ship *addr_ship);
+}							t_repair_commmand;
+
 typedef struct 				s_freight t_freight;	
 
 struct 				s_freight
