@@ -6,7 +6,7 @@
 
 typedef struct 				s_freight t_freight;	
 
-struct 				s_freight
+struct 						s_freight
 {
 	char					*item;
 	t_freight				*prev;
@@ -52,7 +52,7 @@ typedef struct    			s_repair_command
 {
 	char					*name;
 	int						(*func)(t_ship *addr_ship);
-}							t_repair_commmand;
+}							t_repair_command;
 
 char						*readline(void);
 void						my_putchar(const char c);
