@@ -1,6 +1,14 @@
 #include	"ftl.h"
 
-int 						ftl_drive_system_repair(t_ship *addr_ship)
+static const t_repair_command 		g_repair[] =
+{
+	{"weapon", *weapon_system_repair},
+	{"ftl_drive", *ftl_drive_system_repair},
+	{"navigation_tools", *navigation_tools_system_repair},
+	{NULL, NULL}
+};
+
+int 								ftl_drive_system_repair(t_ship *addr_ship)
 {
 	my_putstr("reparation du reacteur en cours...\n");
 	addr_ship->ftl_drive->system_state = NULL;
@@ -16,7 +24,7 @@ int 						ftl_drive_system_repair(t_ship *addr_ship)
 	return(0);
 } 	
 
-int 						navigation_tools_system_repair(t_ship *addr_ship)
+int 								navigation_tools_system_repair(t_ship *addr_ship)
 {
 	my_putstr("reparation du systeme de navigation en cours...\n");
 	addr_ship->nav_tools->system_state = NULL;
@@ -29,10 +37,10 @@ int 						navigation_tools_system_repair(t_ship *addr_ship)
 	}
 	else
 		my_putstr("les reparations du systeme de navigation ont echoue\n");
-	return(0);;
+	return(0);
 }
 
-int							weapon_system_repair(t_ship *addr_ship)
+int									weapon_system_repair(t_ship *addr_ship)
 {
 	my_putstr("reparation du systeme d'armement en cours...\n");
 	addr_ship->weapons->system_state = NULL;
