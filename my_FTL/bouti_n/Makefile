@@ -4,6 +4,7 @@ NAME	=		ftl
 
 SRC		=		air_shed.c\
 				my_string.c\
+				my_string2.c\
 				readline.c\
 				main.c\
 				container.c\
