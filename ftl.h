@@ -68,5 +68,8 @@ void 						ftl_drive_system_check(t_ship *addr_ship);
 void 						navigation_tools_system_check(t_ship *addr_ship);
 void						weapon_system_check(t_ship *addr_ship);
 void						system_control(t_ship *addr_ship);
+int 						navigation_tools_system_repair(t_ship *addr_ship);
+int							weapon_system_repair(t_ship *addr_ship);
+int							ftl_drive_system_repair(t_ship *addr_ship);
 
 #endif
