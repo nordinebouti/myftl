@@ -7,7 +7,8 @@ SRC		=		air_shed.c\
 				readline.c\
 				main.c\
 				container.c\
-				system_control.c
+				system_control.c\
+				system_repair.c\
 
 RM		=		rm -f
 
