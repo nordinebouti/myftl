@@ -4,12 +4,6 @@
 
 #include	<stdlib.h>
 
-typedef struct    			s_repair_command
-{
-	char					*name;
-	int						(*func)(t_ship *addr_ship);
-}							t_repair_commmand;
-
 typedef struct 				s_freight t_freight;	
 
 struct 				s_freight
@@ -53,6 +47,12 @@ typedef	struct				s_ship
   	t_navigation_tools		*nav_tools;
   	t_container				*cont;
 }							t_ship;
+
+typedef struct    			s_repair_command
+{
+	char					*name;
+	int						(*func)(t_ship *addr_ship);
+}							t_repair_commmand;
 
 char						*readline(void);
 void						my_putchar(const char c);
