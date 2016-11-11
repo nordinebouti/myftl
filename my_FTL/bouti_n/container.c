@@ -39,7 +39,7 @@ void						add_freight_to_container(t_ship *addr_ship, t_freight *freight)
 void						del_from_to_container(t_ship *addr_ship, t_freight *freight)
 {
 	t_freight				*i;
-	
+
 	i = NULL;
 	i = malloc(sizeof(t_freight));
 	i = addr_ship->cont->first;
@@ -66,11 +66,15 @@ void						del_from_to_container(t_ship *addr_ship, t_freight *freight)
 	}
 }
 
-void						get_bonus(t_ship *addr_ship)
+int							get_bonus(t_ship *addr_ship)
 {
 	t_freight				*i;
 
 	i = addr_ship->cont->first;
+	if (i == NULL)
+	{
+		return (0);
+	}
 	while (i != NULL)
 	{
 		if (my_strcmp(i->item,"attackbonus") == 0)
@@ -82,4 +86,5 @@ void						get_bonus(t_ship *addr_ship)
 		i = i->next;
 	}
 	free(i);
+	return (1);
 }
