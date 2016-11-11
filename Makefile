@@ -10,6 +10,7 @@ SRC		=		air_shed.c\
 				container.c\
 				system_control.c\
 				system_repair.c\
+				game.c
 
 RM		=		rm -f
 
