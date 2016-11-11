@@ -4,6 +4,7 @@
 
 #include	<stdlib.h>
 #include	<unistd.h>
+#include	<time.h>
 
 typedef struct 				s_freight t_freight;	
 
@@ -20,6 +21,14 @@ typedef	struct 				s_container
 	t_freight				*last;
 	int						nb_elem;
 }							t_container;
+
+typedef struct 				s_enemy
+{
+	int						life;
+	int						damage;
+	int						lvl;
+	char					*status;
+}							t_enemy;
 
 typedef struct 				s_navigation_tools
 {
@@ -42,11 +51,12 @@ typedef struct  			s_ftl_drive
 
 typedef	struct				s_ship
 {
-  	int						hull;
+  	int						health;
   	t_weapon				*weapons;
   	t_ftl_drive				*ftl_drive;
   	t_navigation_tools		*nav_tools;
   	t_container				*cont;
+  	t_enemy					*enemy;
 }							t_ship;
 
 typedef struct    			s_repair_command
@@ -76,7 +86,7 @@ int                        	add_navigation_tools_to_ship(t_ship *addr_ship);
 int							add_container_to_ship(t_ship *addr_ship);
 void						add_freight_to_container(t_ship *addr_ship, t_freight *freight);
 void						del_from_to_container(t_ship *addr_ship, t_freight *freight);
-void						get_bonus(t_ship *addr_ship);
+int							get_bonus(t_ship *addr_ship);
 void 						ftl_drive_system_check(t_ship *addr_ship);
 void 						navigation_tools_system_check(t_ship *addr_ship);
 void						weapon_system_check(t_ship *addr_ship);
@@ -86,8 +96,10 @@ int							weapon_system_repair(t_ship *addr_ship);
 int							ftl_drive_system_repair(t_ship *addr_ship);
 int							system_repair(t_ship *addr_ship);
 int							system_command(t_ship *addr_ship, char *entry);
-int							jump(t_ship addr_ship);
-int							detect(t_ship addr_ship);
-int							attack(t_ship addr_ship);
+int							jump(t_ship *addr_ship);
+int							detect(t_ship *addr_ship);
+int							attack(t_ship *addr_ship);
+int 						detect_enemy(t_ship *addr_ship);
+int							generate_enemy(t_ship *addr_ship);
 
 #endif
