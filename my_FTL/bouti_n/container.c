@@ -39,9 +39,9 @@ void						add_freight_to_container(t_ship *addr_ship, t_freight *freight)
 void						del_from_to_container(t_ship *addr_ship, t_freight *freight)
 {
 	t_freight				*i;
+	
 	i = NULL;
 	i = malloc(sizeof(t_freight));
-
 	i = addr_ship->cont->first;
 	while (i != freight)
 		i = i->next;

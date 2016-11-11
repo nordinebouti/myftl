@@ -55,6 +55,12 @@ typedef struct    			s_repair_command
 	int						(*func)(t_ship *addr_ship);
 }							t_repair_command;
 
+typedef struct    			s_menu_command
+{
+	char					*name;
+	int						(*func)(t_ship *addr_ship);
+}							t_menu_command;
+
 char						*readline(void);
 void						my_putchar(const char c);
 int							my_strlen(const char *str);
@@ -79,5 +85,9 @@ int 						navigation_tools_system_repair(t_ship *addr_ship);
 int							weapon_system_repair(t_ship *addr_ship);
 int							ftl_drive_system_repair(t_ship *addr_ship);
 int							system_repair(t_ship *addr_ship);
+int							system_command(t_ship *addr_ship, char *entry);
+int							jump(t_ship addr_ship);
+int							detect(t_ship addr_ship);
+int							attack(t_ship addr_ship);
 
 #endif
