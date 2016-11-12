@@ -48,18 +48,21 @@ int							get_bonus(t_ship *addr_ship)
 {
 	t_freight				*i;
 
-	i = NULL;
-	i = malloc(sizeof(t_freight));
-	i = addr_ship->cont->f;
+	i = addr_ship->cont->first;
 	if (i == NULL)
 		return (0);
 	my_putstr("Vous explorez les environs et découvrez :\n");
-	while (i != NULL)
+	while (addr_ship->cont->nb_elem != 0)
 	{
 		del_from_container(addr_ship, i->prev);
 		add_attack_bonus(addr_ship, i->item);
 		add_evade_bonus(addr_ship, i->item);
 		add_energy_bonus(addr_ship, i->item);
+		if (i->next == NULL)
+		{
+			del_from_container(addr_ship, i);
+			return (1);
+		}
 		i = i->next;
 	}
 	return (1);

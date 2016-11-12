@@ -41,11 +41,21 @@ int				attack(t_ship *addr_ship)
 
 int				explore(t_ship *addr_ship)
 {
-	my_putnbr(addr_ship->cont->nb_elem);
+	if (my_strcmp(addr_ship->enemy->status, "OK") == 0)
+	{
+		my_putstr("Impossible d'explorer le secteur,");
+		my_putstr("les rebels vous en empêche !\n");
+		return (0);
+	}
+	else if (addr_ship->explore == addr_ship->nav_tools->sector)
+	{
+		my_putstr("secteur dejà exploré !\n");
+		return (1);
+	}
 	while (addr_ship->cont->nb_elem < 10)
 		generate_freight(addr_ship);
 	get_bonus(addr_ship);
-	my_putnbr(addr_ship->cont->nb_elem);
+	addr_ship->explore = addr_ship->nav_tools->sector;
 	return (1);
 }
 
@@ -67,7 +77,7 @@ int				jump(t_ship *addr_ship)
 	my_putstr("Vous venez d'entre dans le secteur ");
 	my_putnbr(addr_ship->nav_tools->sector);
 	my_putstr(" !\n");
-	detect_enemy(addr_ship);
+	set_enemy(addr_ship);
 	return (1);
 }
 

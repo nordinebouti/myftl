@@ -52,6 +52,7 @@ typedef struct  			s_ftl_drive
 typedef	struct				s_ship
 {
   	int						health;
+  	int						explore;
   	t_weapon				*weapons;
   	t_ftl_drive				*ftl_drive;
   	t_navigation_tools		*nav_tools;
@@ -85,7 +86,7 @@ int             			add_ftl_drive_to_ship(t_ship *addr_ship);
 int                        	add_navigation_tools_to_ship(t_ship *addr_ship);
 int							add_container_to_ship(t_ship *addr_ship);
 void						add_freight_to_container(t_ship *addr_ship, t_freight *freight);
-void						del_from_container(t_ship *addr_ship, t_freight *freight);
+int							del_from_container(t_ship *addr_ship, t_freight *freight);
 int							get_bonus(t_ship *addr_ship);
 void 						ftl_drive_system_check(t_ship *addr_ship);
 void 						navigation_tools_system_check(t_ship *addr_ship);
@@ -99,7 +100,7 @@ int							system_command(t_ship *addr_ship, char *entry);
 int							jump(t_ship *addr_ship);
 int							explore(t_ship *addr_ship);
 int							attack(t_ship *addr_ship);
-int 						detect_enemy(t_ship *addr_ship);
+int 						set_enemy(t_ship *addr_ship);
 int							generate_enemy(t_ship *addr_ship);
 int     					attack_enemy(t_ship *addr_ship);
 void						random_disable(t_ship *addr_ship);
@@ -115,5 +116,5 @@ char						*random_bonus();
 int							win(int	sector);
 int							check_ship(t_ship *addr_ship);
 int							help();
-
+int							del_freight(t_ship *addr_ship, t_freight *i);
 #endif
