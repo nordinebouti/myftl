@@ -12,6 +12,7 @@ t_ship	                  *create_ship()
       return(addr_ship);
     }
   addr_ship->health = 50;
+  addr_ship->explore = -1;
   addr_ship->weapons = NULL;
   addr_ship->ftl_drive = NULL;
   addr_ship->nav_tools = NULL;

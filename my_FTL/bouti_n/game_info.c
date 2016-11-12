@@ -24,7 +24,10 @@ int		get_stats(t_ship *addr_ship)
 		my_putnbr(addr_ship->weapons->damage);
 		my_putstr("\nChance d'esquive (en %) : ");
 		my_putnbr(addr_ship->nav_tools->evade);
+		my_putstr("\nEnergie restante : ");
+		my_putnbr(addr_ship->ftl_drive->energy);
 		my_putstr("\n");
+		my_putnbr(addr_ship->enemy->life);
 		return (1);
 }
 

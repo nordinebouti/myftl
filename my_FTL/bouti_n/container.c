@@ -39,7 +39,7 @@ void						add_freight_to_container(t_ship *addr_ship, t_freight *freight)
 	++addr_ship->cont->nb_elem;
 }
 
-void						del_from_container(t_ship *addr_ship, t_freight *freight)
+int						del_from_container(t_ship *addr_ship, t_freight *freight)
 {
 	t_freight				*i;
 
@@ -47,33 +47,45 @@ void						del_from_container(t_ship *addr_ship, t_freight *freight)
 	i = malloc(sizeof(t_freight));
 	i = addr_ship->cont->first;
 
-	if (i != NULL && freight != NULL)
+	if (i == NULL || freight == NULL)
+		return (0);
+	while (i != freight && i != NULL)
+		i = i->next;
+	if (i->next != NULL && i->prev != NULL)
 	{
-		while (i != freight && i != NULL)
-			i = i->next;
-		if (i->next != NULL && i->prev != NULL)
-		{
-			i->prev->next = i->next;
-			i->next->prev = i->prev;
-		}
-		else if (i->prev == NULL)
-		{
-			i->next->prev = NULL;
-			addr_ship->cont->first = i->next;
-		}
-		else
-		{
-			my_putstr("erreur 4\n");
-			i->prev->next = NULL;
-			addr_ship->cont->last = i->prev;
-		}
-		--addr_ship->cont->nb_elem;
-		free(freight);
+		i->prev->next = i->next;
+		i->next->prev = i->prev;
 	}
+	else if (i->prev == NULL && i->next == NULL)
+	{
+		addr_ship->cont->first = NULL;
+		addr_ship->cont->last = NULL;
+	}
+	else
+	{
+		del_freight(addr_ship, i);	
+	}
+	--addr_ship->cont->nb_elem;
+	free(freight);
+	return (1);
 }
 
+int						del_freight(t_ship *addr_ship, t_freight *i)
+{
+	if (i->prev == NULL)
+	{
+		i->next->prev = NULL;
+		addr_ship->cont->first = i->next;
+	}
+	else if (i->next == NULL)
+	{
+		i->prev->next = NULL;
+		addr_ship->cont->last = i->prev;
+	}
+	return (1);
+}
 
-int							generate_freight(t_ship *addr_ship)
+int						generate_freight(t_ship *addr_ship)
 {
 	t_freight	*freight;
 	int			random;
@@ -81,9 +93,8 @@ int							generate_freight(t_ship *addr_ship)
 	freight = NULL;
 	freight = malloc(sizeof(t_freight));
 	random = 0;
-	srand(time(NULL));
-  	random = (rand() % 100);
-  	random = ((random * addr_ship->cont->nb_elem) % 100) + 1;
+	srand(time(NULL) * addr_ship->cont->nb_elem);
+  	random = ((rand()) % 100) + 1;
   	if (random > 30)
   	{
   		freight->item = my_strdup("scrap");

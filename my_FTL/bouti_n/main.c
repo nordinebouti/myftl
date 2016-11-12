@@ -28,4 +28,5 @@ void 			welcome(t_ship *p_ship)
   	add_navigation_tools_to_ship(p_ship);
   	add_container_to_ship(p_ship);
   	generate_enemy(p_ship);
+  	set_enemy(p_ship);
 }

@@ -9,8 +9,8 @@ int     generate_enemy(t_ship *addr_ship)
       my_putstr("Vaisseaux ennemis disparus !\n");
       return (0);
     }
-  addr_ship->enemy->life = 20;
-  addr_ship->enemy->damage = 10;
+  addr_ship->enemy->life = 0;
+  addr_ship->enemy->damage = 0;
   addr_ship->enemy->lvl = 0;
   addr_ship->enemy->status = NULL;
   addr_ship->enemy->status = my_strdup("KO");
@@ -18,7 +18,7 @@ int     generate_enemy(t_ship *addr_ship)
   return (1);
 }
 
-int 		detect_enemy(t_ship *addr_ship)
+int 		set_enemy(t_ship *addr_ship)
 {
   int		random;
   
@@ -30,7 +30,7 @@ int 		detect_enemy(t_ship *addr_ship)
       free(addr_ship->enemy->status);
       addr_ship->enemy->status = my_strdup("OK");
       addr_ship->enemy->life = 20 + (addr_ship->enemy->lvl * 10);
-      addr_ship->enemy->life = 10 + (addr_ship->enemy->lvl * 5);
+      addr_ship->enemy->damage = 10 + (addr_ship->enemy->lvl * 5);
       my_putstr("Vaisseau rebel dans votre secteur !\n");
     }
   return (0);
@@ -40,7 +40,7 @@ int     attack_enemy(t_ship *addr_ship)
 {
   int   random;
 
-  if (my_strcmp(addr_ship->enemy->status, "OK") == 0)
+  if (my_strcmp(addr_ship->enemy->status, "OK") != 0)
     return (0);
   random = 0;
   srand(time(NULL));
@@ -50,8 +50,8 @@ int     attack_enemy(t_ship *addr_ship)
     addr_ship->health -= addr_ship->enemy->damage;
     my_putstr("Un vaisseau ennemi vous attaque\n");
     random_disable(addr_ship);
-    my_putstr("il vous reste ");
-    my_putnbr(addr_ship->health);
+    my_putstr("et vous enlève ");
+    my_putnbr(addr_ship->enemy->damage);
     my_putstr(" points de vie.\n");
     random_disable(addr_ship);
     return (1);
@@ -96,6 +96,6 @@ void      random_energy(t_ship *addr_ship)
   if (random == 1)
     {
       --addr_ship->ftl_drive->energy;
-      my_putstr("Ce combat voua a couté 1 energie\n");
+      my_putstr("Ce combat vous a couté 1 energie\n");
     }
 }
