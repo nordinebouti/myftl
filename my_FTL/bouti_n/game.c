@@ -3,10 +3,12 @@
 static const 	t_menu_command	g_menu[] =
 {
 	{"attack", *attack},
-	{"detect", *detect},
+	{"explore", *explore},
 	{"jump", *jump},
-	{"get_bonus", *get_bonus},
+	{"get_stats", *get_stats},
+	{"system_control", *system_control},
 	{"repair", *system_repair},
+	{"help", *help},
 	{NULL, NULL}
 };
 
@@ -17,7 +19,7 @@ int				attack(t_ship *addr_ship)
 		my_putstr("Aucun vaisseau ennemi dans votre secteur\n");
 		return (0);
 	}
-	else if (my_strcmp(addr_ship->weapons->status, "offline") == 0)
+	else if (my_strcmp(addr_ship->weapons->system_state, "offline") == 0)
 	{
 		my_putstr("[FATAL ERROR]Armement du vaisseau H.S.\n");
 		return (0);
@@ -30,13 +32,20 @@ int				attack(t_ship *addr_ship)
 		addr_ship->enemy->status = my_strdup("KO");
 		++addr_ship->enemy->lvl;
 		my_putstr("Vous avez détruit le vaisseau ennemi du secteur !\n");
+		random_energy(addr_ship);
 	}
+	else
+		attack_enemy(addr_ship);
 	return (1);
 }
 
-int				detect(t_ship *addr_ship)
+int				explore(t_ship *addr_ship)
 {
-	my_putstr(addr_ship->ftl_drive->system_state);
+	my_putnbr(addr_ship->cont->nb_elem);
+	while (addr_ship->cont->nb_elem < 10)
+		generate_freight(addr_ship);
+	get_bonus(addr_ship);
+	my_putnbr(addr_ship->cont->nb_elem);
 	return (1);
 }
 
@@ -48,7 +57,7 @@ int				jump(t_ship *addr_ship)
 		my_putstr("les rebels vous en empêche !\n");
 		return (0);
 	}
-	else if (my_strcmp(addr_ship->ftl_drive->status, "offline") == 0)
+	else if (my_strcmp(addr_ship->ftl_drive->system_state, "offline") == 0)
 	{
 		my_putstr("[FATAL ERROR]Moteur du vaisseau H.S.\n");
 		return (0);
@@ -78,6 +87,23 @@ int				system_command(t_ship *addr_ship, char *entry)
 			return(g_menu[i].func(addr_ship));
 		++i;
 	}
-	my_putstr("[SYSTEM FAILURE] : commande inconnue\n");
+	if (my_strcmp(entry, "exit") != 0)
+		my_putstr("[SYSTEM FAILURE] : commande inconnue\n");
 	return (1);
+}
+
+int 	help()
+{
+	int i;
+
+	my_putstr("Les commandes disponibles sont :\n");
+	i = 0;
+	while (g_menu[i].name != NULL)
+	{
+		my_putstr(" - ");
+		my_putstr(g_menu[i].name);
+		my_putstr("\n");
+		++i;
+	}
+	return (0);
 }

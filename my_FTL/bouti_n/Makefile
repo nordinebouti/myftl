@@ -11,7 +11,9 @@ SRC		=		air_shed.c\
 				system_control.c\
 				system_repair.c\
 				game.c\
-				enemy.c
+				game_info.c\
+				enemy.c\
+				bonus.c\
 
 RM		=		rm -f
 
