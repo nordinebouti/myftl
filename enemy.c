@@ -1,6 +1,6 @@
 #include	"ftl.h"
 
-int     generate_enemy(t_ship *addr_ship)
+int		generate_enemy(t_ship *addr_ship)
 {
   my_putstr("ajout des ennemis en cours...\n");
   addr_ship->enemy = malloc(sizeof(t_enemy));
@@ -18,7 +18,7 @@ int     generate_enemy(t_ship *addr_ship)
   return (1);
 }
 
-int 		set_enemy(t_ship *addr_ship)
+int		set_enemy(t_ship *addr_ship)
 {
   int		random;
   
@@ -36,7 +36,7 @@ int 		set_enemy(t_ship *addr_ship)
   return (0);
 }
 
-int     attack_enemy(t_ship *addr_ship)
+int		attack_enemy(t_ship *addr_ship)
 {
   int   random;
 
@@ -46,49 +46,49 @@ int     attack_enemy(t_ship *addr_ship)
   srand(time(NULL));
   random = (rand() % 100) + 1;
   if (random > addr_ship->nav_tools->evade)
-  {
-    addr_ship->health -= addr_ship->enemy->damage;
-    my_putstr("Un vaisseau ennemi vous attaque\n");
-    random_disable(addr_ship);
-    my_putstr("et vous enlève ");
-    my_putnbr(addr_ship->enemy->damage);
-    my_putstr(" points de vie.\n");
-    random_disable(addr_ship);
-    return (1);
-  }
+    {
+      addr_ship->health -= addr_ship->enemy->damage;
+      my_putstr("Un vaisseau ennemi vous attaque\n");
+      random_disable(addr_ship);
+      my_putstr("et vous enlève ");
+      my_putnbr(addr_ship->enemy->damage);
+      my_putstr(" points de vie.\n");
+      random_disable(addr_ship);
+      return (1);
+    }
   else
-  {
-    my_putstr("Vous avez evite une attaque ennemi !\n");
-    return (1);
-  }
+    {
+      my_putstr("Vous avez evite une attaque ennemi !\n");
+      return (1);
+    }
 }
 
-void    random_disable(t_ship *addr_ship)
+void		random_disable(t_ship *addr_ship)
 {
-  int random;
+  int		random;
 
   random = 0;
   srand(time(NULL));
   random = (rand() % 10) + 1;
   if (random == 1)
-  {
-    addr_ship->nav_tools->system_state = NULL;
-    free(addr_ship->nav_tools->system_state);
-    addr_ship->nav_tools->system_state = my_strdup("offline");
-    my_putstr("Outils de navigation H.S\n");
-  }
+    {
+      addr_ship->nav_tools->system_state = NULL;
+      free(addr_ship->nav_tools->system_state);
+      addr_ship->nav_tools->system_state = my_strdup("offline");
+      my_putstr("Outils de navigation H.S\n");
+    }
   else if (random == 2)
-  {
-    addr_ship->weapons->system_state = NULL;
-    free(addr_ship->weapons->system_state);
-    addr_ship->weapons->system_state = my_strdup("offline");
-    my_putstr("Système d'armement H.S\n");
-  }
+    {
+      addr_ship->weapons->system_state = NULL;
+      free(addr_ship->weapons->system_state);
+      addr_ship->weapons->system_state = my_strdup("offline");
+      my_putstr("Système d'armement H.S\n");
+    }
 }
 
-void      random_energy(t_ship *addr_ship)
+void		random_energy(t_ship *addr_ship)
 {
-  int   random;
+  int		random;
   
   random = 0;
   srand(time(NULL));
