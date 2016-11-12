@@ -1,8 +1,8 @@
 #include "ftl.h"
 
-t_ship	                 *create_ship()
+t_ship	                  *create_ship()
 {
-  t_ship                 *addr_ship;
+  t_ship                  *addr_ship;
 
   my_putstr("construction du vaisseau en cours...\n");
   addr_ship = malloc(sizeof(t_ship));
@@ -11,7 +11,7 @@ t_ship	                 *create_ship()
       my_putstr("le vaisseau n'a pas pu etre construit par manque de materiaux\n");
       return(addr_ship);
     }
-  addr_ship->hull = 50;
+  addr_ship->health = 50;
   addr_ship->weapons = NULL;
   addr_ship->ftl_drive = NULL;
   addr_ship->nav_tools = NULL;
@@ -52,7 +52,7 @@ int                       add_ftl_drive_to_ship(t_ship *addr_ship)
   return(1);
 }
 
-int                        add_navigation_tools_to_ship(t_ship *addr_ship)
+int                       add_navigation_tools_to_ship(t_ship *addr_ship)
 {
   my_putstr("ajout des outils de navigations...\n");
   addr_ship->nav_tools = malloc(sizeof(t_navigation_tools));

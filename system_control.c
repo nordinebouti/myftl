@@ -27,9 +27,10 @@ void						weapon_system_check(t_ship *addr_ship)
 		my_putstr("systeme d'armement hors service!\n");
 }
 
-void						system_control(t_ship *addr_ship)
+int							system_control(t_ship *addr_ship)
 {
 	weapon_system_check(addr_ship);
 	navigation_tools_system_check(addr_ship);
 	weapon_system_check(addr_ship);
+	return(0);
 }

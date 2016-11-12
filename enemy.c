@@ -41,9 +41,61 @@ int     attack_enemy(t_ship *addr_ship)
   int   random;
 
   if (my_strcmp(addr_ship->enemy->status, "OK") == 0)
-  { 
-    random = 0;
-    srand(time(NULL));
-    random = (rand() % 100) + 1;
-    addr_ship->life -= addr_ship->enemy->damage;
+    return (0);
+  random = 0;
+  srand(time(NULL));
+  random = (rand() % 100) + 1;
+  if (random > addr_ship->nav_tools->evade)
+  {
+    addr_ship->health -= addr_ship->enemy->damage;
+    my_putstr("Un vaisseau ennemi vous attaque\n");
+    random_disable(addr_ship);
+    my_putstr("il vous reste ");
+    my_putnbr(addr_ship->health);
+    my_putstr(" points de vie.\n");
+    random_disable(addr_ship);
+    return (1);
+  }
+  else
+  {
+    my_putstr("Vous avez evite une attaque ennemi !\n");
+    return (1);
+  }
+}
+
+void    random_disable(t_ship *addr_ship)
+{
+  int random;
+
+  random = 0;
+  srand(time(NULL));
+  random = (rand() % 10) + 1;
+  if (random == 1)
+  {
+    addr_ship->nav_tools->system_state = NULL;
+    free(addr_ship->nav_tools->system_state);
+    addr_ship->nav_tools->system_state = my_strdup("offline");
+    my_putstr("Outils de navigation H.S\n");
+  }
+  else if (random == 2)
+  {
+    addr_ship->weapons->system_state = NULL;
+    free(addr_ship->weapons->system_state);
+    addr_ship->weapons->system_state = my_strdup("offline");
+    my_putstr("Système d'armement H.S\n");
+  }
+}
+
+void      random_energy(t_ship *addr_ship)
+{
+  int   random;
+  
+  random = 0;
+  srand(time(NULL));
+  random = (rand() % 2);
+  if (random == 1)
+    {
+      --addr_ship->ftl_drive->energy;
+      my_putstr("Ce combat voua a couté 1 energie\n");
+    }
 }

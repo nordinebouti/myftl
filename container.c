@@ -20,6 +20,8 @@ int						  	add_container_to_ship(t_ship *addr_ship)
 
 void						add_freight_to_container(t_ship *addr_ship, t_freight *freight)
 {
+	freight->next = malloc(sizeof(t_freight));
+	freight->prev = malloc(sizeof(t_freight));
 	if (addr_ship->cont->nb_elem == 0)
 	{
 		addr_ship->cont->first = freight;
@@ -32,21 +34,23 @@ void						add_freight_to_container(t_ship *addr_ship, t_freight *freight)
 		addr_ship->cont->last->next = freight;
 		freight->prev = addr_ship->cont->last;
 		addr_ship->cont->last = freight;
+		freight->next = NULL;
 	}
 	++addr_ship->cont->nb_elem;
 }
 
-void						del_from_to_container(t_ship *addr_ship, t_freight *freight)
+void						del_from_container(t_ship *addr_ship, t_freight *freight)
 {
 	t_freight				*i;
 
 	i = NULL;
 	i = malloc(sizeof(t_freight));
 	i = addr_ship->cont->first;
-	while (i != freight)
-		i = i->next;
-	if (i != NULL)
+
+	if (i != NULL && freight != NULL)
 	{
+		while (i != freight && i != NULL)
+			i = i->next;
 		if (i->next != NULL && i->prev != NULL)
 		{
 			i->prev->next = i->next;
@@ -59,32 +63,33 @@ void						del_from_to_container(t_ship *addr_ship, t_freight *freight)
 		}
 		else
 		{
+			my_putstr("erreur 4\n");
 			i->prev->next = NULL;
 			addr_ship->cont->last = i->prev;
 		}
+		--addr_ship->cont->nb_elem;
 		free(freight);
 	}
 }
 
-int							get_bonus(t_ship *addr_ship)
-{
-	t_freight				*i;
 
-	i = addr_ship->cont->first;
-	if (i == NULL)
-	{
-		return (0);
-	}
-	while (i != NULL)
-	{
-		if (my_strcmp(i->item,"attackbonus") == 0)
-			addr_ship->weapons->damage += 5;
-		else if (my_strcmp(i->item,"evadebonus") == 0)
-			addr_ship->nav_tools->evade += 3;
-		else if (my_strcmp(i->item,"energy") == 0)
-			addr_ship->ftl_drive->energy += 1;
-		i = i->next;
-	}
-	free(i);
-	return (1);
+int							generate_freight(t_ship *addr_ship)
+{
+	t_freight	*freight;
+	int			random;
+
+	freight = NULL;
+	freight = malloc(sizeof(t_freight));
+	random = 0;
+	srand(time(NULL));
+  	random = (rand() % 100);
+  	random = ((random * addr_ship->cont->nb_elem) % 100) + 1;
+  	if (random > 30)
+  	{
+  		freight->item = my_strdup("scrap");
+  	}
+  	else
+  		freight->item = my_strdup(random_bonus());
+  	add_freight_to_container(addr_ship, freight);
+  	return (0);
 }
